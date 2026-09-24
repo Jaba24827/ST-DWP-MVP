@@ -1,0 +1,214 @@
+/* =====================================================================
+   SL-DWP design system
+   St. Luke green (#14794A) on white. The vertical menu is white so the
+   green reads as the brand rather than as decoration, and the page
+   headings carry the colour.
+
+   Breakpoints: 0–559 phone · 560–819 large phone · 820–1199 tablet
+                1200+ laptop and desktop
+   ===================================================================== */
+
+:root{
+  /* Brand */
+  --brand:#14794A;
+  --brand-deep:#0E5A37;
+  --brand-soft:#E6F2EC;
+  --brand-line:#BFDDCE;
+
+  /* Surfaces */
+  --paper:#F3F6F4;
+  --surface:#FFFFFF;
+  --sidebar:#FFFFFF;
+  --line:#DCE3DE;
+
+  /* Text — light mode */
+  --text:#16211C;
+  --text-2:#5A6B63;
+  --text-3:#87968E;
+
+  /* Status */
+  --brick:#A8403A;  --brick-soft:#F7E7E5;
+  --gold:#96701A;   --gold-soft:#F6EEDA;
+
+  --btn-fg:#FFFFFF;
+
+  /* Type scale (1.200 minor third from 15px) */
+  --fs-xs:11.5px; --fs-sm:13px; --fs-base:15px;
+  --fs-md:18px;   --fs-lg:21px; --fs-xl:24px; --fs-2xl:30px;
+
+  /* Space (4px base) */
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px; --s-6:32px; --s-7:48px;
+
+  --radius:10px; --radius-sm:6px;
+  --sidebar-w:250px;
+
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+
+/* Dark mode. The request was explicit: body text goes white, not grey.
+   --text is pure white and the two muted steps are lifted well above the
+   4.5:1 line so nothing reads as washed out on an OLED phone. */
+:root[data-theme="dark"]{
+  --brand:#5FD39B; --brand-deep:#8FE6BA; --brand-soft:#123329; --brand-line:#1E4A3A;
+  --paper:#0B1310; --surface:#121D18; --sidebar:#0F1915; --line:#26362E;
+  --text:#FFFFFF; --text-2:#D3DED8; --text-3:#A9B8B0;
+  --brick:#F09C93; --brick-soft:#33191A;
+  --gold:#E7C169;  --gold-soft:#2E2617;
+  --btn-fg:#06170F;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --brand:#5FD39B; --brand-deep:#8FE6BA; --brand-soft:#123329; --brand-line:#1E4A3A;
+    --paper:#0B1310; --surface:#121D18; --sidebar:#0F1915; --line:#26362E;
+    --text:#FFFFFF; --text-2:#D3DED8; --text-3:#A9B8B0;
+    --brick:#F09C93; --brick-soft:#33191A;
+    --gold:#E7C169;  --gold-soft:#2E2617;
+    --btn-fg:#06170F;
+    color-scheme:dark;
+  }
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--paper);color:var(--text);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:var(--fs-base);line-height:1.5;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{margin:0;font-weight:600;letter-spacing:-0.012em}
+h1{font-size:var(--fs-xl);color:var(--brand)}   /* main headings carry the brand */
+h2{font-size:var(--fs-lg)}
+h3{font-size:var(--fs-md)}
+p{margin:0 0 var(--s-3);max-width:70ch}
+a{color:var(--brand)}
+
+/* Accessibility floor -------------------------------------------------- */
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:var(--s-2);top:-44px;background:var(--brand);color:var(--btn-fg);
+  padding:9px 14px;border-radius:var(--radius-sm);z-index:99;transition:top .15s}
+.skip:focus{top:calc(var(--s-2) + env(safe-area-inset-top,0px))}
+[aria-busy="true"]{cursor:progress}
+
+/* Shell ---------------------------------------------------------------- */
+.app{display:grid;grid-template-columns:var(--sidebar-w) 1fr;height:100%}
+.app.is-collapsed{grid-template-columns:68px 1fr}
+.sidebar{background:var(--sidebar);border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden}
+.sidebar__head{padding:15px var(--s-4);display:flex;align-items:center;min-height:64px;border-bottom:1px solid var(--line)}
+.sidebar__nav{flex:1;overflow-y:auto;padding:var(--s-2) 10px var(--s-4)}
+.sidebar__group{font-size:var(--fs-xs);color:var(--text-3);padding:14px var(--s-2) 6px}
+.sidebar__foot{padding:13px var(--s-4);border-top:1px solid var(--line);font-size:12px;color:var(--text-3)}
+.nav-item{display:flex;align-items:center;gap:11px;width:100%;padding:9px 10px;margin-bottom:2px;
+  background:none;border:none;color:var(--text-2);border-radius:var(--radius-sm);cursor:pointer;
+  text-align:left;font-size:14px;text-decoration:none}
+.nav-item:hover{background:var(--paper);color:var(--text)}
+.nav-item.is-active{background:var(--brand-soft);color:var(--brand);font-weight:500;box-shadow:inset 3px 0 0 var(--brand)}
+.nav-item svg{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.6}
+
+.main{display:flex;flex-direction:column;min-width:0;height:100%;overflow:hidden}
+.topbar{display:flex;align-items:center;gap:13px;padding:0 var(--s-5);min-height:64px;
+  background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.content{flex:1;overflow-y:auto;padding:var(--s-5) var(--s-5) var(--s-7)}
+.page{max-width:1140px;margin:0 auto}
+.page__head{margin-bottom:var(--s-5)}
+.page__head p{color:var(--text-2);font-size:14px;margin-top:6px}
+
+/* Controls ------------------------------------------------------------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s-2);padding:9px var(--s-4);
+  border-radius:var(--radius-sm);border:1px solid transparent;background:var(--brand);color:var(--btn-fg);
+  font-weight:500;cursor:pointer;transition:background .15s;min-height:40px}
+.btn:hover{background:var(--brand-deep)}
+.btn--ghost{background:transparent;color:var(--text);border-color:var(--line)}
+.btn--ghost:hover{background:var(--paper)}
+.btn--danger{background:var(--brick);color:#fff}
+.btn--sm{padding:5px 10px;font-size:var(--fs-sm);min-height:32px}
+.btn--wide{width:100%}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+
+.field{margin-top:15px}
+.field label{display:block;font-size:var(--fs-sm);color:var(--text-2);margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;padding:10px 11px;border:1px solid var(--line);
+  border-radius:var(--radius-sm);background:var(--surface);color:var(--text);font:inherit;min-height:42px}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--brand);outline:none;box-shadow:0 0 0 3px var(--brand-soft)}
+.field .error-text{color:var(--brick);font-size:var(--fs-sm);margin-top:5px}
+.field input[aria-invalid="true"]{border-color:var(--brick)}
+
+/* Cards, tables, tags -------------------------------------------------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:var(--s-4)}
+.grid{display:grid;gap:14px}
+.grid--kpi{grid-template-columns:repeat(auto-fit,minmax(176px,1fr))}
+.grid--split{grid-template-columns:1.35fr 1fr;align-items:start}
+.kpi{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--brand);
+  border-radius:var(--radius);padding:15px var(--s-4)}
+.kpi span{display:block;font-size:12.5px;color:var(--text-2)}
+.kpi b{display:block;font-size:27px;font-weight:600;margin-top:5px;font-variant-numeric:tabular-nums}
+.kpi--alert{border-top-color:var(--brick)}
+.kpi--alert b{color:var(--brick)}
+
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-weight:600;font-size:12.5px;color:var(--text-2);padding:11px 14px;
+  border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--paper)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.5px;color:var(--text-2)}
+.tag{display:inline-block;padding:2px 9px;border-radius:999px;font-size:var(--fs-xs);font-weight:500;
+  background:var(--paper);color:var(--text-2);border:1px solid var(--line)}
+.tag--ok{background:var(--brand-soft);color:var(--brand);border-color:transparent}
+.tag--warn{background:var(--gold-soft);color:var(--gold);border-color:transparent}
+.tag--deny{background:var(--brick-soft);color:var(--brick);border-color:transparent}
+.empty{padding:34px 20px;text-align:center;color:var(--text-2)}
+.empty b{display:block;color:var(--text);margin-bottom:4px}
+
+/* Password meter ------------------------------------------------------- */
+.policy ul{list-style:none;margin:var(--s-2) 0 0;padding:0;display:grid;gap:4px;font-size:var(--fs-sm)}
+.policy li{display:flex;gap:var(--s-2);align-items:center;color:var(--text-2)}
+.policy li::before{content:"\25CB";color:var(--text-3)}
+.policy li.is-met{color:var(--brand)}
+.policy li.is-met::before{content:"\25CF";color:var(--brand)}
+.meter{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:10px}
+.meter i{display:block;height:100%;width:0;background:var(--brick);border-radius:99px;transition:width .2s,background .2s}
+
+/* Flash + toast -------------------------------------------------------- */
+.flash{padding:11px 14px;border-radius:var(--radius-sm);margin-bottom:var(--s-4);font-size:13.5px}
+.flash--ok{background:var(--brand-soft);color:var(--brand)}
+.flash--error{background:var(--brick-soft);color:var(--brick)}
+
+/* ---------------------------------------------------------------------
+   Responsive. Mobile first in behaviour: the sidebar becomes a drawer,
+   the search collapses into the menu, tables scroll inside their own
+   container so the page body never moves sideways.
+   --------------------------------------------------------------------- */
+@media (max-width:1199px){
+  :root{--sidebar-w:220px}
+  .grid--split{grid-template-columns:1fr}
+}
+@media (max-width:819px){
+  .app,.app.is-collapsed{grid-template-columns:1fr}
+  .sidebar{position:fixed;inset:0 auto 0 0;width:264px;z-index:60;
+    transform:translateX(-100%);transition:transform .2s;box-shadow:0 0 40px rgba(0,0,0,.18)}
+  .app.is-drawer .sidebar{transform:none}
+  .app.is-drawer .scrim{display:block}
+  .scrim{display:none;position:fixed;inset:0;background:rgba(6,20,14,.45);z-index:50}
+  .topbar__search{display:none}
+  .content{padding:var(--s-4) 14px var(--s-7)}
+}
+@media (max-width:559px){
+  :root{--fs-xl:21px}
+  .topbar{padding:0 var(--s-3);gap:9px}
+  .topbar__who{display:none}
+  .grid--kpi{grid-template-columns:1fr 1fr}
+  .btn{width:100%}            /* thumb-sized targets on a phone */
+  .page__actions .btn{width:auto}
+}
+@media print{
+  .sidebar,.topbar,.btn{display:none}
+  .content{overflow:visible;padding:0}
+}
