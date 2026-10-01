@@ -16,7 +16,7 @@ return new class extends Migration
             $t->string('destination', 190);
             $t->unsignedTinyInteger('attempts')->default(0);
             $t->timestamp('consumed_at')->nullable();
-            $t->timestamp('expires_at');
+            $t->timestamp('expires_at')->nullable();
             $t->string('ip', 45)->nullable();
             $t->timestamp('created_at')->useCurrent();
             $t->index(['user_id','consumed_at','expires_at']);

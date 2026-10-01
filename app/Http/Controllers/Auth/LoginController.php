@@ -47,7 +47,7 @@ class LoginController extends Controller
         // response time comparable in both branches.
         $valid = $user
             ? Hash::check($request->input('password'), $user->password)
-            : Hash::check($request->input('password'), '$2y$12$invalidinvalidinvalidinvalidinvalidinvalidinvalidinvalidin');
+            : Hash::check($request->input('password'), "\$2y\$12\$YfpL1mt.pD5t6GDuEeFV6OGEoIRCYiHxUP.bYq5j1unqCtgAJbp2.");
 
         if (! $valid || ! $user) {
             RateLimiter::hit($key, 60);
