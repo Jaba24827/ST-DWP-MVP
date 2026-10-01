@@ -1,0 +1,13 @@
+{
+  "resources/css/sldwp.css": {
+    "file": "assets/sldwp-S7zEIBuD.css",
+    "src": "resources/css/sldwp.css",
+    "isEntry": true
+  },
+  "resources/js/app.jsx": {
+    "file": "assets/app-DURDbprR.js",
+    "name": "app",
+    "src": "resources/js/app.jsx",
+    "isEntry": true
+  }
+}

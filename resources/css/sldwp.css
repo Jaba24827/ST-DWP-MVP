@@ -186,7 +186,10 @@ tbody tr:hover{background:var(--paper)}
    the search collapses into the menu, tables scroll inside their own
    container so the page body never moves sideways.
    --------------------------------------------------------------------- */
-@media (max-width:1199px){
+@media (max-width:1449px){
+  :root{--sidebar-w:220px}
+  .grid--split{grid-template-columns:1fr}
+}@media (max-width:1199px){
   :root{--sidebar-w:220px}
   .grid--split{grid-template-columns:1fr}
 }
@@ -205,10 +208,11 @@ tbody tr:hover{background:var(--paper)}
   .topbar{padding:0 var(--s-3);gap:9px}
   .topbar__who{display:none}
   .grid--kpi{grid-template-columns:1fr 1fr}
-  .btn{width:100%}            /* thumb-sized targets on a phone */
+  .btn{width:100%}             /* thumb-sized targets on a phone */
   .page__actions .btn{width:auto}
 }
 @media print{
   .sidebar,.topbar,.btn{display:none}
   .content{overflow:visible;padding:0}
 }
+
