@@ -16,7 +16,7 @@ use Illuminate\Validation\ValidationException;
 /**
  * First factor. Deliberately uniform: a wrong address and a wrong password
  * produce the same message and comparable timing, so the form cannot be
- * used to enumerate which addresses exist.
+ * used to enumerate which addresses exist...
  */
 class LoginController extends Controller
 {
