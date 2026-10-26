@@ -1,1 +1,38 @@
-node_modules
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# Laravel generated files
+/storage/*.key
+/storage/framework/cache/
+/storage/framework/sessions/
+/storage/framework/views/
+/storage/logs/
+/bootstrap/cache/*.php
+
+# Local databases and backups
+*.sqlite
+*.sqlite3
+*.sql
+*.sql.gz
+*.bak
+
+# Test results and temporary artifacts
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/coverage/
+/.phpunit.cache/
+/.DS_Store
+Thumbs.db
+# Local maintenance backups
+.maintenance-backups/
+resources/views/layouts/*.backup-*
+
+# PHPUnit generated cache
+.phpunit.result.cache

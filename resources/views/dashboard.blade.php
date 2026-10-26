@@ -14,19 +14,19 @@
     <div class="kpi"><span>Notices for you</span><b>{{ $notices->count() }}</b></div>
   </div>
 
-  <div class="grid grid--split" style="margin-top:14px">
+  <div class="grid grid--split dashboard-panels">
     <div class="card">
       <h3>Repository holdings by sector</h3>
-      <canvas id="sectorChart" height="210" aria-label="Documents by sector and classification" role="img"></canvas>
-      <p style="font-size:12.5px;color:var(--text-3);margin-top:10px">Documents held by each sector, split by classification.</p>
+      <canvas id="sectorChart" height="210" aria-label="Documents by sector and classification" role="img" data-holdings="{{ json_encode($holdings) }}"></canvas>
+      <p class="dashboard-chart-note">Documents held by each sector, split by classification.</p>
     </div>
     <div class="card">
       <h3>Latest notices</h3>
       @forelse ($notices as $n)
-        <div style="padding:12px 0;border-bottom:1px solid var(--line)">
+        <div class="notice-item">
           <b>{{ $n->title }}</b>
-          <p style="font-size:13.5px;color:var(--text-2);margin:4px 0 0">{{ Str::limit($n->body, 120) }}</p>
-          <div style="font-size:12px;color:var(--text-3);margin-top:6px">{{ $n->author->name }} · {{ $n->published_at->format('j M Y') }}</div>
+          <p class="notice-item__body">{{ Str::limit($n->body, 120) }}</p>
+          <div class="notice-item__meta">{{ $n->author->name }} · {{ $n->published_at->format('j M Y') }}</div>
         </div>
       @empty
         <div class="empty"><b>No notices yet</b>Notices published by managers appear here.</div>
@@ -36,21 +36,5 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<script>
-  var holdings = @json($holdings);
-  var sectors = [...new Set(holdings.map(h => h.sector))];
-  function series(cls){ return sectors.map(s => (holdings.find(h => h.sector===s && h.classification===cls)||{}).total || 0); }
-  var style = getComputedStyle(document.documentElement);
-  new Chart(document.getElementById('sectorChart'), {
-    type: 'bar',
-    data: { labels: sectors, datasets: [
-      { label: 'Public', data: series('public'), backgroundColor: '#8FC7AC' },
-      { label: 'Internal', data: series('internal'), backgroundColor: '#14794A' },
-      { label: 'Restricted', data: series('restricted'), backgroundColor: '#A8403A' }
-    ]},
-    options: { responsive:true, scales:{ x:{stacked:true, grid:{display:false}}, y:{stacked:true, beginAtZero:true, ticks:{precision:0}} },
-      plugins:{ legend:{ position:'bottom' } } }
-  });
-</script>
+@vite(['resources/js/dashboard-chart.js'])
 @endpush

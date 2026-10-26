@@ -33,10 +33,19 @@ class RoleController extends Controller
         // Lockout guard: an administrator cannot strip roles.manage from the
         // role they themselves hold. Enforced here, in the application tier,
         // so no interface change or crafted request can bypass it.
-        if ($request->user()->role_id === $role->id && ! $keys->contains('roles.manage')) {
-            $this->audit->denied('roles.update', $role->name.': roles.manage (self-lockout blocked)');
+       if ((int) $request->user()->role_id === (int) $role->id && ! $keys->contains('roles.manage')) {
+            $message = 'You cannot remove roles.manage from your own role.';
 
-            return back()->withErrors(['permissions' => 'You cannot remove roles.manage from your own role.']);
+            $this->audit->denied(
+                'roles.update',
+                $role->name.': roles.manage (self-lockout blocked)'
+            );
+
+            if ($request->expectsJson()) {
+                return response()->json(['message' => $message], 422);
+            }
+
+            return back()->withErrors(['permissions' => $message]);
         }
 
         $before = $role->permissions->pluck('key');

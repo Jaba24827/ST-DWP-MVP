@@ -4,8 +4,8 @@
 @section('content')
   <div class="page__head"><h1>Staff directory</h1><p>Contact details for staff across the Foundation's sites.</p></div>
   <form method="GET" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
-    <input type="search" name="q" value="{{ request('q') }}" placeholder="Search by name">
-    <select name="sector_id" onchange="this.form.submit()">
+    <input type="search" name="q" value="{{ request('q') }}" placeholder="Search by name" aria-label="Search staff by name">
+    <select name="sector_id" aria-label="Filter directory by sector" onchange="this.form.submit()">
       <option value="">All sectors</option>
       @foreach ($sectors as $s)<option value="{{ $s->id }}" {{ (int)request('sector_id')===$s->id?'selected':'' }}>{{ $s->name }}</option>@endforeach
     </select>

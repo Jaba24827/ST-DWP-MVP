@@ -15,7 +15,7 @@
           <td><span class="mono">{{ $perm->key }}</span><br><span style="font-size:12px;color:var(--text-3)">{{ $perm->description }}</span></td>
           @foreach ($roles as $role)
             <td style="text-align:center">
-              <form action="{{ route('roles.update', $role) }}" method="POST">
+              <form class="permission-form" action="{{ route('roles.update', $role) }}" method="POST">
                 @csrf @method('PATCH')
                 @foreach ($role->permissions as $p)
                   @if ($p->id !== $perm->id)<input type="hidden" name="permissions[]" value="{{ $p->id }}">@endif

@@ -7,14 +7,14 @@
     <p>Files are filtered by classification before the list is built, so you only see what your role permits.</p>
     @can_perm('documents.upload')
       <div class="page__actions" style="margin-top:14px">
-        <button class="btn" onclick="document.getElementById('uploadForm').showModal()">Upload a document</button>
+        <button class="btn" type="button" data-dialog-open="uploadForm">Upload a document</button>
       </div>
     @endcan_perm
   </div>
 
   <form method="GET" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
     <label class="sr-only" for="q">Search documents</label>
-    <input id="q" name="q" type="search" value="{{ request('q') }}" placeholder="Search documents">
+    <input id="q" name="q" type="search" aria-label="Search documents" value="{{ request('q') }}" placeholder="Search documents">
     <label class="sr-only" for="classification">Filter by classification</label>
     <select id="classification" name="classification" onchange="this.form.submit()">
       <option value="">All classifications</option>
@@ -71,13 +71,13 @@
         <select id="sector_id" name="sector_id">
           @foreach (\App\Models\Sector::orderBy('name')->get() as $s)<option value="{{ $s->id }}">{{ $s->name }}</option>@endforeach
         </select></div>
-      <div class="field"><label for="classification">Classification</label>
-        <select id="classification" name="classification" required>
+      <div class="field"><label for="upload_classification">Classification</label>
+        <select id="upload_classification" name="classification" required>
           <option value="public">Public</option><option value="internal" selected>Internal</option><option value="restricted">Restricted</option>
         </select></div>
       <div class="field"><label for="file">File (PDF, Word, Excel or image, up to 10 MB)</label><input id="file" name="file" type="file" required></div>
       <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:16px">
-        <button type="button" class="btn btn--ghost" onclick="document.getElementById('uploadForm').close()">Cancel</button>
+        <button type="button" class="btn btn--ghost" data-dialog-close="uploadForm">Cancel</button>
         <button class="btn" type="submit">Upload</button>
       </div>
     </form>

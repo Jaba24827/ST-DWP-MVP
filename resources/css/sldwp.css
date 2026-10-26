@@ -189,9 +189,6 @@ tbody tr:hover{background:var(--paper)}
 @media (max-width:1449px){
   :root{--sidebar-w:220px}
   .grid--split{grid-template-columns:1fr}
-}@media (max-width:1199px){
-  :root{--sidebar-w:220px}
-  .grid--split{grid-template-columns:1fr}
 }
 @media (max-width:819px){
   .app,.app.is-collapsed{grid-template-columns:1fr}
@@ -208,7 +205,7 @@ tbody tr:hover{background:var(--paper)}
   .topbar{padding:0 var(--s-3);gap:9px}
   .topbar__who{display:none}
   .grid--kpi{grid-template-columns:1fr 1fr}
-  .btn{width:100%}             /* thumb-sized targets on a phone */
+  .btn{width:100%}            /* thumb-sized targets on a phone */
   .page__actions .btn{width:auto}
 }
 @media print{
@@ -216,3 +213,160 @@ tbody tr:hover{background:var(--paper)}
   .content{overflow:visible;padding:0}
 }
 
+/* Login styles migrated from guest.blade.php */
+#signin{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;
+    background:linear-gradient(158deg,#0E5A37 0%,#14794A 52%,#0B3F28 100%)}
+  .signin-brand{padding:clamp(26px,5vw,60px);color:#D9EEE2;display:flex;flex-direction:column;justify-content:space-between}
+  .signin-lede{max-width:34ch;margin:clamp(22px,6vh,52px) 0}
+  .signin-lede h1{font-size:clamp(27px,3.3vw,38px);line-height:1.16;color:#fff;font-weight:600}
+  .signin-lede p{color:#B7DCC8;margin-top:14px}
+  .signin-panel{background:var(--surface);display:flex;align-items:center;justify-content:center;padding:clamp(20px,4vw,46px)}
+  .signin-card{width:100%;max-width:392px}
+  .signin-card h2{color:var(--brand);margin-bottom:4px}
+  .step-note{font-size:12.5px;color:var(--text-2);margin-bottom:14px}
+  @media (max-width:880px){#signin{grid-template-columns:1fr}}
+
+/* TOPBAR ACCOUNT ALIGNMENT FIX */
+@media (min-width:560px) {
+  .topbar__crumb {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .topbar__who {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-left: auto;
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+
+  .topbar__avatar {
+    flex: 0 0 auto;
+  }
+
+  .topbar__identity {
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  .topbar__role {
+    display: inline-block;
+  }
+
+  .topbar__who form {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    margin: 0;
+  }
+
+  .topbar__who .btn {
+    width: auto;
+    white-space: nowrap;
+  }
+}
+/* END TOPBAR ACCOUNT ALIGNMENT FIX */
+
+
+/* SL-DWP UI CONSISTENCY PATCH 2026-10-21 */
+
+/* Dashboard spacing and notice hierarchy */
+.dashboard-panels {
+  margin-top: 18px;
+  gap: 16px;
+}
+.dashboard-chart-note {
+  max-width: none;
+  margin: 10px 0 0;
+  color: var(--text-3);
+  font-size: 12.5px;
+}
+.notice-item {
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+.notice-item:first-of-type {
+  padding-top: 4px;
+}
+.notice-item:last-child {
+  border-bottom: 0;
+  padding-bottom: 2px;
+}
+.notice-item__body {
+  margin: 5px 0 0;
+  color: var(--text-2);
+  font-size: 13.5px;
+}
+.notice-item__meta {
+  margin-top: 7px;
+  color: var(--text-3);
+  font-size: 12px;
+}
+
+/* Account security and sign-in activity */
+.security-submit {
+  margin-top: 16px;
+}
+.activity-item {
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+.activity-item:first-of-type {
+  padding-top: 3px;
+}
+.activity-item:last-child {
+  border-bottom: 0;
+  padding-bottom: 2px;
+}
+.activity-item__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.activity-item__meta {
+  margin-top: 5px;
+  color: var(--text-3);
+  font-size: 12px;
+}
+
+/* Audit filters: keyboard-friendly native controls */
+.audit-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.audit-filters select,
+.audit-filters input[type="search"] {
+  min-height: 40px;
+  padding: 8px 11px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+.audit-filters select {
+  flex: 0 1 190px;
+  min-width: 150px;
+}
+.audit-filters input[type="search"] {
+  flex: 1 1 240px;
+  min-width: 180px;
+}
+.audit-filters select:focus,
+.audit-filters input[type="search"]:focus {
+  border-color: var(--brand);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+.audit-filters .btn {
+  width: auto;
+  flex: 0 0 auto;
+}

@@ -8,16 +8,20 @@
     "lint": "eslint resources/js --ext .js,.jsx"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.5",
     "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^9.9.0",
     "laravel-vite-plugin": "^1.0.5",
-    "vite": "^5.4.0",
-    "eslint": "^9.9.0"
+    "typescript": "^5.9.3",
+    "vite": "^5.4.0"
   },
   "dependencies": {
+    "chart.js": "^4.4.1",
+    "jquery": "^3.7.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.0",
-    "chart.js": "^4.4.1",
-    "jquery": "^3.7.1"
+    "react-router-dom": "^6.26.0"
   }
 }

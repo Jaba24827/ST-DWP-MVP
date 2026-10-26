@@ -28,12 +28,17 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     // Reachable with the password alone; nothing else is.
     Route::get('/mfa',         [MfaController::class, 'show'])->name('mfa.show');
-    Route::post('/mfa/send',   [MfaController::class, 'send'])->middleware('throttle:5,1')->name('mfa.send');
-    Route::post('/mfa/verify', [MfaController::class, 'verify'])->middleware('throttle:10,1')->name('mfa.verify');
+    Route::post('/mfa/send',   [MfaController::class, 'send'])->middleware('throttle:5,1,mfa-send')->name('mfa.send');
+    Route::post('/mfa/verify', [MfaController::class, 'verify'])->middleware('throttle:10,1,mfa-verify')->name('mfa.verify');
     Route::post('/logout',     [LoginController::class, 'destroy'])->name('logout');
 });
 
 Route::middleware(['auth','mfa'])->group(function () {
+    // React single-page application. Laravel still enforces authentication and MFA.
+    Route::get('/app/{path?}', fn () => view('react.app'))
+        ->where('path', '.*')
+        ->name('react.app');
+
 
     Route::get('/', fn () => redirect()->route('dashboard'));
 

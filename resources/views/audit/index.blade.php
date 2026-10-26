@@ -6,14 +6,16 @@
     <h1>Audit log</h1>
     <p>Authentication attempts, multi-factor challenges, denied requests and changes to users, roles, notices and documents.</p>
   </div>
-  <form method="GET" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
-    <select name="kind" onchange="this.form.submit()">
+  <form method="GET" class="audit-filters">
+    <label class="sr-only" for="audit_kind">Filter by event type</label>
+    <select id="audit_kind" name="kind" aria-label="Filter by event type">
       <option value="">All events</option>
       <option value="auth" {{ request('kind')==='auth'?'selected':'' }}>Authentication</option>
       <option value="denied" {{ request('kind')==='denied'?'selected':'' }}>Denied access</option>
       <option value="change" {{ request('kind')==='change'?'selected':'' }}>Changes</option>
     </select>
-    <input type="search" name="q" value="{{ request('q') }}" placeholder="Search actor or action">
+    <label class="sr-only" for="audit_q">Search audit events</label>
+    <input id="audit_q" type="search" name="q" aria-label="Search audit events" value="{{ request('q') }}" placeholder="Search actor or action">
     <button class="btn btn--ghost btn--sm">Filter</button>
   </form>
   <div class="table-wrap">

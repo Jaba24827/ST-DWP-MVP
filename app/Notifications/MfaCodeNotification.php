@@ -16,10 +16,25 @@ class MfaCodeNotification extends Notification
 
     public function __construct(private string $code, private string $channel) {}
 
-    public function via(object $notifiable): array
+   public function via(object $notifiable): array
+    {
+        if ($this->channel === 'sms') {
+            if (app()->environment('testing')) {
+                return ['sldwp-sms-log'];
+            }
+
+            throw new \LogicException(
+                'SMS delivery is not configured outside testing.'
+            );
+        }
+
+        return ['mail'];
+    }
+
+    /*public function via(object $notifiable): array
     {
         return $this->channel === 'sms' ? ['sms'] : ['mail'];
-    }
+    }*/
 
     public function toMail(object $notifiable): MailMessage
     {

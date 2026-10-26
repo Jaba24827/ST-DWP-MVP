@@ -18,7 +18,7 @@
           <td>
             <form method="POST" action="{{ route('users.update', $u) }}">
               @csrf @method('PATCH')
-              <select name="role_id" onchange="this.form.submit()">
+              <select name="role_id" aria-label="{{ 'Change role for ' . $u->name }}" onchange="this.form.submit()">
                 @foreach ($roles as $r)<option value="{{ $r->id }}" {{ $u->role_id === $r->id ? 'selected' : '' }}>{{ $r->name }}</option>@endforeach
               </select>
             </form>

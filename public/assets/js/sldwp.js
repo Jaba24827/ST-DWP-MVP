@@ -121,12 +121,36 @@
     setTimeout(function () { $f.fadeOut(200, function () { $(this).remove(); }); }, 4000);
   };
 
+  /* ---- Native dialog controls (CSP-safe) ------------------------------ */
+  SLDWP.dialogs = {
+    init: function () {
+      $(document).on('click', '[data-dialog-open]', function () {
+        var id = this.getAttribute('data-dialog-open');
+        var dialog = document.getElementById(id);
+
+        if (dialog && typeof dialog.showModal === 'function' && !dialog.open) {
+          dialog.showModal();
+        }
+      });
+
+      $(document).on('click', '[data-dialog-close]', function () {
+        var id = this.getAttribute('data-dialog-close');
+        var dialog = document.getElementById(id);
+
+        if (dialog && typeof dialog.close === 'function' && dialog.open) {
+          dialog.close();
+        }
+      });
+    }
+  };
+
   $(function () {
     SLDWP.theme.init();
     SLDWP.nav.init();
     SLDWP.password.init();
     SLDWP.matrix.init();
     SLDWP.mfa.init();
+    SLDWP.dialogs.init();
   });
 
   window.SLDWP = SLDWP;

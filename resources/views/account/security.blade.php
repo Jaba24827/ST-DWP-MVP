@@ -23,16 +23,16 @@
           </ul>
         </div>
         @error('password') <p class="error-text" role="alert">{{ $message }}</p> @enderror
-        <button id="pwSubmit" class="btn btn--wide" type="submit" disabled style="margin-top:16px">Change password</button>
+        <button id="pwSubmit" class="btn btn--wide security-submit" type="submit" disabled>Change password</button>
       </form>
     </div>
     <div class="card">
       <h3>Recent sign-in activity</h3>
       @forelse ($recent as $r)
-        <div style="padding:9px 0;border-bottom:1px solid var(--line)">
-          <div style="display:flex;justify-content:space-between"><span class="mono">{{ $r->action }}</span>
+        <div class="activity-item">
+          <div class="activity-item__heading"><span class="mono">{{ $r->action }}</span>
             <span class="tag {{ $r->result==='denied'?'tag--deny':'tag--ok' }}">{{ $r->result }}</span></div>
-          <div style="font-size:12px;color:var(--text-3)">{{ $r->created_at->format('d/m H:i') }}</div>
+          <div class="activity-item__meta">{{ $r->created_at->format('d/m H:i') }}</div>
         </div>
       @empty
         <div class="empty"><b>Nothing recorded yet</b></div>

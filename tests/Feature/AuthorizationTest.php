@@ -12,7 +12,7 @@ class AuthorizationTest extends TestCase
     {
         $staff = User::where(
             'email',
-            'jaebets.jeangilles@stlukehaiti.org'
+            'r.jeanbaptiste@stlukehaiti.org'
         )->firstOrFail();
 
         $doc = Document::where(
@@ -38,7 +38,7 @@ class AuthorizationTest extends TestCase
     {
         $staff = User::where(
             'email',
-            'jaebets.jeangilles@stlukehaiti.org'
+            'r.jeanbaptiste@stlukehaiti.org'
         )->firstOrFail();
 
         $classifications = Document::visibleTo($staff)
@@ -56,7 +56,7 @@ class AuthorizationTest extends TestCase
     {
         $admin = User::where(
             'email',
-            'jjaebets2@gmail.com'
+            'j.dorsainvil@stlukehaiti.org'
         )->firstOrFail();
 
         $this->actingAs($admin)
@@ -88,7 +88,7 @@ class AuthorizationTest extends TestCase
     {
         $user = User::where(
             'email',
-            'jjaebets2@gmail.com'
+            'j.dorsainvil@stlukehaiti.org'
         )->firstOrFail();
 
         $this->actingAs($user)

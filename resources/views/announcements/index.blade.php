@@ -6,7 +6,7 @@
     <h1>Notices</h1><p>Notices published to your sector and to the whole Foundation.</p>
     @can_perm('announcements.publish')
       <div class="page__actions" style="margin-top:14px">
-        <button class="btn" onclick="document.getElementById('newNotice').showModal()">Publish a notice</button>
+        <button class="btn" data-dialog-open="newNotice">Publish a notice</button>
       </div>
     @endcan_perm
   </div>
@@ -42,7 +42,7 @@
           @foreach ($sectors as $s)<option value="{{ $s->name }}">{{ $s->name }}</option>@endforeach
         </select></div>
       <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:16px">
-        <button type="button" class="btn btn--ghost" onclick="document.getElementById('newNotice').close()">Cancel</button>
+        <button type="button" class="btn btn--ghost" data-dialog-close="newNotice">Cancel</button>
         <button class="btn" type="submit">Publish</button>
       </div>
     </form>

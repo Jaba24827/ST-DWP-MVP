@@ -1,13 +1,24 @@
 {
   "resources/css/sldwp.css": {
-    "file": "assets/sldwp-S7zEIBuD.css",
+    "file": "assets/sldwp-BSRubJl2.css",
     "src": "resources/css/sldwp.css",
     "isEntry": true
   },
+  "resources/css/sldwp2.css": {
+    "file": "assets/sldwp2-CkiwA2lV.css",
+    "src": "resources/css/sldwp2.css",
+    "isEntry": true
+  },
   "resources/js/app.jsx": {
-    "file": "assets/app-DURDbprR.js",
+    "file": "assets/app-ChXWf4Nl.js",
     "name": "app",
     "src": "resources/js/app.jsx",
+    "isEntry": true
+  },
+  "resources/js/dashboard-chart.js": {
+    "file": "assets/dashboard-chart-DJ6RWv1Q.js",
+    "name": "dashboard-chart",
+    "src": "resources/js/dashboard-chart.js",
     "isEntry": true
   }
 }

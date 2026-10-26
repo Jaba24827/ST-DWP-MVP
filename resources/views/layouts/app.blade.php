@@ -20,12 +20,12 @@
   <div class="main">
     @include('partials.topbar')
 
-    <div class="content" id="main">
+    <div class="content" id="main" tabindex="0">
       <div class="page">
         @if (session('status'))
           <div class="flash flash--ok" role="status">{{ session('status') }}</div>
         @endif
-        @if ($errors->any())
+        @if (isset($errors) && $errors->any())
           <div class="flash flash--error" role="alert">{{ $errors->first() }}</div>
         @endif
 
@@ -35,7 +35,7 @@
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/sldwp.js') }}"></script>
 @stack('scripts')
 </body>

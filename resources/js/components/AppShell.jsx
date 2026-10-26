@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { useSession, useCan } from '../hooks/useSession.jsx';
+import { useSession } from '../hooks/useSession.jsx';
 
 /**
  * Same shell contract as the Blade layout: a white vertical sidebar, a
@@ -37,7 +37,7 @@ export default function AppShell() {
         </div>
         <nav className="sidebar__nav" aria-label="Main">
           {NAV.map((g) => {
-            const visible = g.items.filter((i) => useCan(i.perm));
+            const visible = g.items.filter((i) => session?.permissions?.includes(i.perm));
             if (!visible.length) return null;
             return (
               <React.Fragment key={g.group}>

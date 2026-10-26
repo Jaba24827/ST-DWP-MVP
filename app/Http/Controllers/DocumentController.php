@@ -28,6 +28,10 @@ class DocumentController extends Controller
             ->paginate(20)
             ->withQueryString();
 
+        if ($request->expectsJson()) {
+            return response()->json($documents);
+        }
+
         return view('documents.index', [
             'documents' => $documents,
             'hidden'    => Document::count() - Document::visibleTo($user)->count(),

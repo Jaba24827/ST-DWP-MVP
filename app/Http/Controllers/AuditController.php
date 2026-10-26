@@ -14,7 +14,8 @@ class AuditController extends Controller
         $logs = AuditLog::ofKind($request->string('kind')->toString() ?: null)
             ->when($term, fn ($q) => $q->where(fn ($s) => $s
                 ->where('actor', 'like', '%'.addcslashes($term, '%_\\').'%')
-                ->orWhere('action', 'like', '%'.addcslashes($term, '%_\\').'%')))
+                ->orWhere('action', 'like', '%'.addcslashes($term, '%_\\').'%'))
+                ->orWhere('target', 'like', '%'.addcslashes($term, '%_\\').'%'))
             ->latest('id')
             ->paginate(50)
             ->withQueryString();
